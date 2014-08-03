@@ -74,7 +74,7 @@ SSH into node1 and issue the following command.
 ### Test Spark on YARN
 You can run Spark on YARN by issuing the following command.
 ```
-$SPARH_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
+$SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master yarn-cluster \
     --num-executors 10 \
     --executor-cores 2 \
