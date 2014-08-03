@@ -72,7 +72,7 @@ SSH into node1 and issue the following command.
 1. $SPARK_HOME/sbin/start-all.sh
 
 ### Test Spark on YARN
-You can run Spark on YARN by issuing the following command.
+You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master yarn-cluster \
@@ -83,20 +83,20 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
 ```
 	
 ### Test Spark using Shell
-Start the Spark shell using the following command.
+Start the Spark shell using the following command. Try NOT to run this command on the slave nodes.
 
 ```
 $SPARK_HOME/bin/spark-shell --master spark://node1:7077
 ```
 
-Then go here https://spark.apache.org/docs/latest/quick-start.html to start the tutorial.
+Then go here https://spark.apache.org/docs/latest/quick-start.html to start the tutorial. Most likely, you will have to load data into HDFS to make the tutorial work (Spark cannot read data on the local file system).
 
 # Web UI
 You can check the following URLs to monitor the Hadoop daemons.
 
 1. [NameNode] (http://10.211.55.101:50070/dfshealth.html)
 2. [ResourceManager] (http://10.211.55.102:8088/cluster)
-3. [JobHistory] (http://10.211.55.101:19888/jobhistory)
+3. [JobHistory] (http://10.211.55.102:19888/jobhistory)
 4. [Spark] (http://10.211.55.101:8080)
 
 # Vagrant boxes
