@@ -28,7 +28,7 @@ Some gotcha's.
 4. This project has NOT been tested with the VMWare provider for Vagrant.
 5. You may change the script (common.sh) to point to a different location for Hadoop and Spark to be downloaded from. Here is a list of mirrors for Hadoop: http://www.apache.org/dyn/closer.cgi/hadoop/common/.
 
-# Advance Stuff
+# Advanced Stuff
 
 If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfile to have even more HDFS DataNodes, YARN NodeManagers, and Spark slaves. Just find the line that says "numNodes = 4" in Vagrantfile and increase that number. The scripts should dynamically provision the additional slaves for you.
 
