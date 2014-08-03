@@ -1,0 +1,4 @@
+/.vagrant
+/resources/hadoop-2.4.1.tar.gz
+/resources/jdk-7u51-linux-x64.gz
+/resources/spark-1.0.1-bin-hadoop2.tgz
