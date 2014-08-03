@@ -32,7 +32,7 @@ Some gotcha's.
 
 If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfile to have even more HDFS DataNodes, YARN NodeManagers, and Spark slaves. Just find the line that says "numNodes = 4" in Vagrantfile and increase that number. The scripts should dynamically provision the additional slaves for you.
 
-# Make the VM setup faster
+# Make the VMs setup faster
 You can make the VM setup even faster if you pre-download the Hadoop, Spark, and Oracle JDK into the /resources directory.
 
 1. /resources/hadoop-2.4.1.tar.gz
