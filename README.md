@@ -41,6 +41,56 @@ You can make the VM setup even faster if you pre-download the Hadoop, Spark, and
 
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
+# Post Provisioning
+After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. SSH into node1 and issue the following command.
+
+1. $HADOOP_PREFIX/bin/hdfs namenode -format pihadoop
+
+## Start Hadoop Daemons (HDFS + YARN)
+SSH into node1 and issue the following commands to start HDFS.
+
+1. $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode
+2. $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
+
+SSH into node2 and issue the following commands to start YARN.
+
+1. $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR start resourcemanager
+2. $HADOOP_YARN_HOME/sbin/yarn-daemons.sh --config $HADOOP_CONF_DIR start nodemanager
+3. $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
+4. $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
+
+### Test YARN
+Run the following command to make sure you can run a MapReduce job.
+
+```
+yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.1.jar pi 2 100
+```
+
+## Start Spark in Standalone Mode
+SSH into node1 and issue the following command.
+
+1. $SPARK_HOME/sbin/start-all.sh
+
+### Test Spark on YARN
+You can run Spark on YARN by issuing the following command.
+```
+$SPARH_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
+    --master yarn-cluster \
+    --num-executors 10 \
+    --executor-cores 2 \
+    lib/spark-examples*.jar \
+    100
+```
+	
+### Test Spark using Shell
+Start the Spark shell using the following command.
+
+```
+$SPARK_HOME/bin/spark-shell --master spark://node1:7077
+```
+
+Then go here https://spark.apache.org/docs/latest/quick-start.html to start the tutorial.
+
 # Web UI
 You can check the following URLs to monitor the Hadoop daemons.
 
