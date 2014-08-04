@@ -44,7 +44,7 @@ The setup script will automatically detect if these files (with precisely the sa
 # Post Provisioning
 After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. SSH into node1 and issue the following command.
 
-1. $HADOOP_PREFIX/bin/hdfs namenode -format pihadoop
+1. $HADOOP_PREFIX/bin/hdfs namenode -format myhadoop
 
 ## Start Hadoop Daemons (HDFS + YARN)
 SSH into node1 and issue the following commands to start HDFS.
