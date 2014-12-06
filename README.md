@@ -3,7 +3,7 @@ vagrant-hadoop-2.4.1-spark-1.0.1
 
 # Introduction
 
-Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.0.1. 
+Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.1.1. 
 
 1. node1 : HDFS NameNode + Spark Master
 2. node2 : YARN ResourceManager + JobHistoryServer + ProxyServer
@@ -17,7 +17,7 @@ Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 an
 3. Run ```vagrant box add centos65 https://github.com/2creatives/vagrant-centos/releases/download/v6.5.1/centos65-x86_64-20131205.box```
 4. Git clone this project, and change directory (cd) into this project (directory).
 5. Run ```vagrant up``` to create the VM.
-6. Run ```vagrant ssh``` to get into your VM.
+6. Run ```vagrant ssh node-1``` to get into your VM.
 7. Run ```vagrant destroy``` when you want to destroy and get rid of the VM.
 
 Some gotcha's.
@@ -35,7 +35,7 @@ If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfil
 # Make the VMs setup faster
 You can make the VM setup even faster if you pre-download the Hadoop, Spark, and Oracle JDK into the /resources directory.
 
-1. /resources/hadoop-2.4.1.tar.gz
+1. /resources/hadoop-2.5.2.tar.gz
 2. /resources/spark-1.0.1-bin-hadoop2.tgz
 3. /resources/jdk-7u51-linux-x64.gz
 
@@ -44,6 +44,7 @@ The setup script will automatically detect if these files (with precisely the sa
 # Post Provisioning
 After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. SSH into node1 and issue the following command.
 
+0. su (pass: vagrant)
 1. $HADOOP_PREFIX/bin/hdfs namenode -format myhadoop
 
 ## Start Hadoop Daemons (HDFS + YARN)
@@ -63,7 +64,7 @@ SSH into node2 and issue the following commands to start YARN.
 Run the following command to make sure you can run a MapReduce job.
 
 ```
-yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.1.jar pi 2 100
+yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.5.2.jar pi 2 100
 ```
 
 ## Start Spark in Standalone Mode
@@ -75,7 +76,7 @@ SSH into node1 and issue the following command.
 You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
-    --master yarn-cluster \
+    --master yarn --executor-memory 512M \
     --num-executors 10 \
     --executor-cores 2 \
     lib/spark-examples*.jar \
