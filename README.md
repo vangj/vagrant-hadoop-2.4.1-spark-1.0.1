@@ -1,9 +1,9 @@
-vagrant-hadoop-2.4.1-spark-1.0.1
+vagrant-hadoop-2.6.0-spark-1.1.1
 ================================
 
 # Introduction
 
-Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.0.1. 
+Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.6.0 and Spark v1.1.1. 
 
 1. node1 : HDFS NameNode + Spark Master
 2. node2 : YARN ResourceManager + JobHistoryServer + ProxyServer
@@ -35,8 +35,8 @@ If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfil
 # Make the VMs setup faster
 You can make the VM setup even faster if you pre-download the Hadoop, Spark, and Oracle JDK into the /resources directory.
 
-1. /resources/hadoop-2.4.1.tar.gz
-2. /resources/spark-1.0.1-bin-hadoop2.tgz
+1. /resources/hadoop-2.6.0.tar.gz
+2. /resources/spark-1.1.1-bin-hadoop2.4.tgz
 3. /resources/jdk-7u51-linux-x64.gz
 
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
@@ -63,7 +63,7 @@ SSH into node2 and issue the following commands to start YARN.
 Run the following command to make sure you can run a MapReduce job.
 
 ```
-yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.1.jar pi 2 100
+yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar pi 2 100
 ```
 
 ## Start Spark in Standalone Mode
@@ -78,7 +78,7 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master yarn-cluster \
     --num-executors 10 \
     --executor-cores 2 \
-    lib/spark-examples*.jar \
+    $SPARK_HOME/lib/spark-examples*.jar \
     100
 ```
 	
