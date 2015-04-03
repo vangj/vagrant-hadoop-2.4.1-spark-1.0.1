@@ -16,6 +16,7 @@ function installRemoteSpark {
 function setupSpark {
 	echo "setup spark"
 	cp -f /vagrant/resources/spark/slaves /usr/local/spark/conf
+	cp -f /vagrant/resources/spark/spark-env.sh /usr/local/spark/conf
 }
 
 function setupEnvVars {
