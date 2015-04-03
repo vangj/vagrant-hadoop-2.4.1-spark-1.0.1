@@ -42,7 +42,9 @@ You can make the VM setup even faster if you pre-download the Hadoop, Spark, and
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
 # Post Provisioning
-After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. SSH into node1 and issue the following command.
+After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. Note, you need to be root to complete these post-provisioning steps. (Type in "su" and the password is "vagrant"). 
+
+SSH into node1 and issue the following command.
 
 1. $HADOOP_PREFIX/bin/hdfs namenode -format myhadoop
 
