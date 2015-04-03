@@ -75,6 +75,17 @@ SSH into node1 and issue the following command.
 
 ### Test Spark on YARN
 You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
+
+```
+$SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
+    --master yarn \
+    --num-executors 10 \
+    --executor-cores 2 \
+    $SPARK_HOME/lib/spark-examples*.jar \
+    100
+```
+
+### Test code directly on Spark	
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master spark://node1:7077 \
