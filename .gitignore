@@ -4,3 +4,10 @@
 /resources/spark-1.0.1-bin-hadoop2.tgz
 /resources/spark-1.3.0-bin-hadoop2.4.tgz
 /resources/hadoop-2.6.0.tar.gz
+/learn-scala/.cache
+/learn-scala/.classpath
+/learn-scala/.gitignore
+/learn-scala/.project
+/learn-scala/.settings/org.eclipse.core.resources.prefs
+/learn-scala/.settings/org.eclipse.jdt.core.prefs
+/learn-scala/.settings/org.eclipse.m2e.core.prefs
