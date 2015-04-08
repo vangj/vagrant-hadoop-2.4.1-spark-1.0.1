@@ -65,7 +65,7 @@ SSH into node2 and issue the following commands to start YARN.
 Run the following command to make sure you can run a MapReduce job.
 
 ```
-yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.1.jar pi 2 100
+yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar pi 2 100
 ```
 
 ## Start Spark in Standalone Mode

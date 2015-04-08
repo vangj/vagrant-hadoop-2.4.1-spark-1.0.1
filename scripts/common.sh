@@ -5,7 +5,7 @@ JAVA_ARCHIVE=jdk-7u51-linux-x64.gz
 #hadoop
 HADOOP_PREFIX=/usr/local/hadoop
 HADOOP_CONF=$HADOOP_PREFIX/etc/hadoop
-HADOOP_VERSION=hadoop-2.4.1
+HADOOP_VERSION=hadoop-2.6.0
 HADOOP_ARCHIVE=$HADOOP_VERSION.tar.gz
 HADOOP_MIRROR_DOWNLOAD=http://archive.apache.org/dist/hadoop/core/hadoop-2.4.1/hadoop-2.4.1.tar.gz
 HADOOP_RES_DIR=/vagrant/resources/hadoop
