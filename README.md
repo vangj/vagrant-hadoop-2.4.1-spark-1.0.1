@@ -42,14 +42,16 @@ You can make the VM setup even faster if you pre-download the Hadoop, Spark, and
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
 # Make sure YARN and Spark jobs can run
-## Test YARN
+I typically run the following tests after post-provisioning on node1 (as root user). 
+
+### Test YARN
 Run the following command to make sure you can run a MapReduce job.
 
 ```
 yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar pi 2 100
 ```
 
-## Test Spark on YARN
+### Test Spark on YARN
 You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
 
 ```
@@ -61,7 +63,7 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     100
 ```
 
-## Test code directly on Spark	
+### Test code directly on Spark	
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master spark://node1:7077 \
@@ -79,6 +81,8 @@ $SPARK_HOME/bin/spark-shell --master spark://node1:7077
 ```
 
 Then go here https://spark.apache.org/docs/latest/quick-start.html to start the tutorial. Most likely, you will have to load data into HDFS to make the tutorial work (Spark cannot read data on the local file system).
+
+You might also want to dive into the learn-scala folder as that is a companion Scala project to learn Spark.
 
 # Web UI
 You can check the following URLs to monitor the Hadoop daemons.
