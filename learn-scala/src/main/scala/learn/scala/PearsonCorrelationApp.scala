@@ -3,20 +3,20 @@ package learn.scala
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-case class Index(i:Integer, j:Integer)
-case class Computation(x:Double,y:Double,xx:Double, yy:Double, xy:Double, n:Double)
-
 object PearsonCorrelationApp {
+  case class Index(i:Integer, j:Integer)
+  case class Computation(x:Double,y:Double,xx:Double, yy:Double, xy:Double, n:Double)
+
   def main(args:Array[String]) {
     val input = args(0)
     val output = args(1)
     
-    val conf = new SparkConf()
-     .setAppName(s"Pearson Correlation $input")
-    val sc = new SparkContext(conf)
+    val sc = new SparkContext(
+        new SparkConf()
+        .setAppName(s"Pearson Correlation $input $output"))
     
-    val file = sc.textFile(input)
-    val tmap = file.flatMap(line => {
+    sc.textFile(input)
+    .flatMap(line => {
       val arr = line.split(",")
       for {
         i <- 0 until arr.length
@@ -32,8 +32,7 @@ object PearsonCorrelationApp {
         (k, v)
       }
     })
-    
-    val tred = tmap.reduceByKey((a:Computation, b:Computation) => {
+    .reduceByKey((a:Computation, b:Computation) => {
       val x = a.x + b.x
       val y = a.y + b.y
       val xx = a.xx + b.xx
@@ -43,8 +42,7 @@ object PearsonCorrelationApp {
       val c = new Computation(x, y, xx, yy, xy, n)
       (c)
     })
-    
-    tred.map(f => { 
+    .map(f => { 
       val k = f._1
       val v = f._2
       
