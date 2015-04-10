@@ -53,6 +53,8 @@ object DiscreteNaiveBayesClassifierApp {
     
     val model = learnModel(sc, trInput)
     testModel(sc, model, teInput, output)
+    
+    sc.stop
   }
   
   def testModel(sc:SparkContext, model:NBModel, teInput:String, output:String) = {

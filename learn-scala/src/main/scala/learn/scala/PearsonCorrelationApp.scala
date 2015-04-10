@@ -61,6 +61,6 @@ object PearsonCorrelationApp {
       (soutput)
     }).saveAsTextFile(output)
     
-    
+    sc.stop
   }
 }

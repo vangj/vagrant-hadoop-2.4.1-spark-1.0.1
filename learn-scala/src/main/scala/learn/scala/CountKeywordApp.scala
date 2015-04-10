@@ -12,5 +12,6 @@ object CountKeywordApp {
     val bookData = sc.textFile(input, 2).cache()
     val count = bookData.filter(line => line.contains(keyword)).count()
     println(s"total lines with '$keyword' is $count")
+    sc.stop
   }
 }
