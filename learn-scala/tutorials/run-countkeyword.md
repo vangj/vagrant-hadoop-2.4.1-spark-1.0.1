@@ -19,7 +19,7 @@ $SPARK_HOME/bin/spark-submit --class learn.scala.CountKeywordApp \
     --master yarn \
     --num-executors 10 \
     --executor-cores 2 \
-    scala-0.0.1-SNAPSHOT.jar \
+    learn-scala-0.0.1-SNAPSHOT.jar \
     /data/test.txt \
     the
 ```
@@ -29,7 +29,7 @@ $SPARK_HOME/bin/spark-submit --class learn.scala.CountKeywordApp \
     --master spark://node1:7077 \
     --num-executors 10 \
     --executor-cores 2 \
-    scala-0.0.1-SNAPSHOT.jar \
+    learn-scala-0.0.1-SNAPSHOT.jar \
     /data/test.txt \
     the
 ```
