@@ -17,6 +17,10 @@ function setupSpark {
 	echo "setup spark"
 	cp -f /vagrant/resources/spark/slaves /usr/local/spark/conf
 	cp -f /vagrant/resources/spark/spark-env.sh /usr/local/spark/conf
+	cp -f /vagrant/resources/spark/spark-defaults.conf /usr/local/spark/conf
+	cp -f /vagrant/resources/spark/log4j.properties /usr/local/spark/conf
+	cp -f /vagrant/resources/spark/metrics.properties /usr/local/spark/conf
+	cp -f /vagrant/resources/spark/fairscheduler.xml /usr/local/spark/conf
 }
 
 function setupEnvVars {

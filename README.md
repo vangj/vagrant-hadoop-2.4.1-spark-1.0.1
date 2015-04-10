@@ -73,6 +73,13 @@ SSH into node1 and issue the following command.
 
 1. $SPARK_HOME/sbin/start-all.sh
 
+If you want to start the Spark history server, run the following commands.
+```
+hdfs dfs -mkdir /tmp
+hdfs dfs -mkdir /tmp/spark-events
+$SPARK_HOME/sbin/start-history-server.sh
+```
+
 ### Test Spark on YARN
 You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
 
@@ -111,6 +118,7 @@ You can check the following URLs to monitor the Hadoop daemons.
 2. [ResourceManager] (http://10.211.55.102:8088/cluster)
 3. [JobHistory] (http://10.211.55.102:19888/jobhistory)
 4. [Spark] (http://10.211.55.101:8080)
+5. [Spark History] (http://10.211.55.101:18080)
 
 # Vagrant boxes
 A list of available Vagrant boxes is shown at http://www.vagrantbox.es. 
