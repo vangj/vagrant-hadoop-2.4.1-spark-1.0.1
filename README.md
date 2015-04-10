@@ -41,45 +41,15 @@ You can make the VM setup even faster if you pre-download the Hadoop, Spark, and
 
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
-# Post Provisioning
-After you have provisioned the cluster, you need to run some commands to initialize your Hadoop cluster. Note, you need to be root to complete these post-provisioning steps. (Type in "su" and the password is "vagrant"). 
-
-SSH into node1 and issue the following command.
-
-1. $HADOOP_PREFIX/bin/hdfs namenode -format myhadoop
-
-## Start Hadoop Daemons (HDFS + YARN)
-SSH into node1 and issue the following commands to start HDFS.
-
-1. $HADOOP_PREFIX/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start namenode
-2. $HADOOP_PREFIX/sbin/hadoop-daemons.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
-
-SSH into node2 and issue the following commands to start YARN.
-
-1. $HADOOP_YARN_HOME/sbin/yarn-daemon.sh --config $HADOOP_CONF_DIR start resourcemanager
-2. $HADOOP_YARN_HOME/sbin/yarn-daemons.sh --config $HADOOP_CONF_DIR start nodemanager
-3. $HADOOP_YARN_HOME/sbin/yarn-daemon.sh start proxyserver --config $HADOOP_CONF_DIR
-4. $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver --config $HADOOP_CONF_DIR
-
-### Test YARN
+# Make sure YARN and Spark jobs can run
+## Test YARN
 Run the following command to make sure you can run a MapReduce job.
 
 ```
 yarn jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar pi 2 100
 ```
 
-## Start Spark in Standalone Mode
-SSH into node1 and issue the following command.
-
-1. $SPARK_HOME/sbin/start-all.sh
-
-If you want to start the Spark history server, run the following commands.
-```
-hdfs dfs -mkdir /tmp/spark-events
-$SPARK_HOME/sbin/start-history-server.sh
-```
-
-### Test Spark on YARN
+## Test Spark on YARN
 You can test if Spark can run on YARN by issuing the following command. Try NOT to run this command on the slave nodes.
 
 ```
@@ -91,7 +61,7 @@ $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     100
 ```
 
-### Test code directly on Spark	
+## Test code directly on Spark	
 ```
 $SPARK_HOME/bin/spark-submit --class org.apache.spark.examples.SparkPi \
     --master spark://node1:7077 \
