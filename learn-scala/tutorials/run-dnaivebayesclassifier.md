@@ -14,7 +14,7 @@ hdfs dfs -copyFromLocal dnb-test.csv /data
 ```
 hdfs dfs -mkdir /output
 ```
-# Run the Pearson correlation application on YARN.
+# Run the Naive Bayes application on YARN.
 ```
 $SPARK_HOME/bin/spark-submit --class learn.scala.DiscreteNaiveBayesClassifierApp \
     --master yarn \
@@ -25,7 +25,7 @@ $SPARK_HOME/bin/spark-submit --class learn.scala.DiscreteNaiveBayesClassifierApp
     /data/dnb-test.csv \
     /output/dnb-yarn
 ```
-# Run the Pearson correlation application on Spark.
+# Run the Naive Bayes application on Spark.
 ```
 $SPARK_HOME/bin/spark-submit --class learn.scala.DiscreteNaiveBayesClassifierApp \
     --master spark://node1:7077 \
