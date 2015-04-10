@@ -46,6 +46,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				s.path = "scripts/setup-spark-slaves.sh"
 				s.args = "-s 3 -t #{numNodes}"
 			end
+			if i == 1
+				node.vm.provision "shell", path: "scripts/init-start-all-services.sh"
+			end
 		end
 	end
 end
