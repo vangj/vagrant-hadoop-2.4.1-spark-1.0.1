@@ -75,7 +75,6 @@ SSH into node1 and issue the following command.
 
 If you want to start the Spark history server, run the following commands.
 ```
-hdfs dfs -mkdir /tmp
 hdfs dfs -mkdir /tmp/spark-events
 $SPARK_HOME/sbin/start-history-server.sh
 ```
