@@ -5,7 +5,37 @@ import org.apache.spark.SparkContext
 
 object PearsonCorrelationApp {
   case class Index(i:Integer, j:Integer)
-  case class Computation(x:Double,y:Double,xx:Double, yy:Double, xy:Double, n:Double)
+  class Computation(_x:Double, _y:Double, _xx:Double, _yy:Double, _xy:Double, _n:Double) extends Serializable {
+    def x = _x
+    def y = _y
+    def xx = _xx
+    def yy = _yy
+    def xy = _xy
+    def n = _n
+    
+    def add(that:Computation): Computation = {
+      val x = this.x + that.x
+      val y = this.y + that.y
+      val xx = this.xx + that.xx
+      val yy = this.yy + that.yy
+      val xy = this.xy + that.xy
+      val n = this.n + that.n
+      val c = new Computation(x, y, xx, yy, xy, n)
+      (c)
+    }
+    
+    def +(that:Computation): Computation = add(that)
+    
+    def compute(): Double = {
+      val num = xy - (x * y / n)
+      val den1 = (xx - (math.pow(x, 2.0d)/n))
+      val den2 = (yy - (math.pow(y, 2.0d)/n))
+      val den3 = den1 * den2
+      val den = math.sqrt(den3)
+      val r = num / den
+      r
+    }
+  }
 
   def main(args:Array[String]) {
     val input = args(0)
@@ -24,37 +54,18 @@ object PearsonCorrelationApp {
       } yield {
         val x = arr(i).toDouble
         val y = arr(j).toDouble
-        val xx = x * x
-        val yy = y * y
-        val xy = x * y
         val k = new Index(i, j)
-        val v = new Computation(x, y, xx, yy, xy, 1.0d)
+        val v = new Computation(x, y, x*x, y*y, x*y, 1.0d)
         (k, v)
       }
     })
-    .reduceByKey((a:Computation, b:Computation) => {
-      val x = a.x + b.x
-      val y = a.y + b.y
-      val xx = a.xx + b.xx
-      val yy = a.yy + b.yy
-      val xy = a.xy + b.xy
-      val n = a.n + b.n
-      val c = new Computation(x, y, xx, yy, xy, n)
-      (c)
-    })
+    .reduceByKey((a:Computation, b:Computation) => a + b)
     .map(f => { 
       val k = f._1
       val v = f._2
       
-      val num = v.xy - (v.x * v.y / v.n)
-      val den1 = (v.xx - (math.pow(v.x, 2.0d)/v.n))
-      val den2 = (v.yy - (math.pow(v.y, 2.0d)/v.n))
-      val den3 = den1 * den2
-      val den = math.sqrt(den3)
-      val r = num / den
-      val i = k.i
-      val j = k.j
-      val soutput = s"$i, $j, $r"
+      val r = v.compute
+      val soutput = s"${k.i}, ${k.j}, $r"
       println(soutput)
       (soutput)
     }).saveAsTextFile(output)
