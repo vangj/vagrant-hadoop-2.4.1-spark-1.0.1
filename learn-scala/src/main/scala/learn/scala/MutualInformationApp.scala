@@ -106,9 +106,7 @@ object MutualInformationApp {
         (k, v)
       }
     })
-    .reduceByKey((a, b) => { 
-      a + b
-    })
+    .reduceByKey(_ + _)
     .map(f => {
       val k = f._1
       val v = f._2
