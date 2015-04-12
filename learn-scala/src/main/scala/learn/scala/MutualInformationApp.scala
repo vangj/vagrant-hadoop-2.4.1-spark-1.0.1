@@ -75,6 +75,7 @@ object MutualInformationApp {
     
     def +(that:Counts): Counts = add(that)
   }
+  
   def main(args:Array[String]) {
     val input = args(0)
     val output = args(1)
@@ -83,6 +84,12 @@ object MutualInformationApp {
         new SparkConf()
         .setAppName(s"Mutual Information $input $output"))
     
+    start(input, output, sc)
+    
+    sc.stop
+  }
+  
+  def start(input:String, output:String, sc:SparkContext) {
     sc.textFile(input)
     .flatMap(line => { 
       val arr = line.split(",")
@@ -111,7 +118,5 @@ object MutualInformationApp {
     .sortByKey(false)
     .map(item => s"${item._2._1}, ${item._2._2}, ${item._1}")
     .saveAsTextFile(output)
-    
-    sc.stop
   }
 }
