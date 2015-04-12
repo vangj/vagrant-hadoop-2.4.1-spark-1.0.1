@@ -106,9 +106,11 @@ object MutualInformationApp {
       val k = f._1
       val v = f._2
       val r = v.compute
-      val o = s"${r.i}, ${r.j}, ${r.mi}"
-      o
-    }).saveAsTextFile(output)
+      (r.mi, (r.i, r.j))
+    })
+    .sortByKey(false)
+    .map(item => s"${item._2._1}, ${item._2._2}, ${item._1}")
+    .saveAsTextFile(output)
     
     sc.stop
   }
