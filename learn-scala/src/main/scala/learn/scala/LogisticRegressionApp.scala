@@ -104,7 +104,7 @@ object LogisticRegressionApp {
       }
       new RWeights(rweights)
     })
-    .reduce((a:RWeights, b:RWeights) => a + b)
+    .reduce(_ + _)
     
     if(weights.size == 0) {
       iweights.weights
