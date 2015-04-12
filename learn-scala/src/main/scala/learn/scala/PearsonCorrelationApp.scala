@@ -45,6 +45,12 @@ object PearsonCorrelationApp {
         new SparkConf()
         .setAppName(s"Pearson Correlation $input $output"))
     
+    start(input, output, sc)
+    
+    sc.stop
+  }
+  
+  def start(input:String, output:String, sc:SparkContext) {
     sc.textFile(input)
     .flatMap(line => {
       val arr = line.split(",")
@@ -59,7 +65,7 @@ object PearsonCorrelationApp {
         (k, v)
       }
     })
-    .reduceByKey((a:Computation, b:Computation) => a + b)
+    .reduceByKey(_ + _)
     .map(f => { 
       val k = f._1
       val v = f._2
@@ -67,9 +73,13 @@ object PearsonCorrelationApp {
       val r = v.compute
       val soutput = s"${k.i}, ${k.j}, $r"
       println(soutput)
-      (soutput)
-    }).saveAsTextFile(output)
-    
-    sc.stop
+      (r, (k.i, k.j))
+    })
+    .sortBy(f => { 
+      val a = f._1
+      math.abs(a)
+    }, false)
+    .map(item => s"${item._2._1}, ${item._2._2}, ${item._1}")
+    .saveAsTextFile(output)
   }
 }
