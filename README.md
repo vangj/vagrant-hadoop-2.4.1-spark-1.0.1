@@ -1,9 +1,9 @@
-vagrant-hadoop-2.4.1-spark-1.0.1
+vagrant-hadoop-2.4.1-spark-1.3.0
 ================================
 
 # Introduction
 
-Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.0.1. 
+Vagrant project to spin up a cluster of 4 virtual machines with Hadoop v2.4.1 and Spark v1.3.0. 
 
 1. node1 : HDFS NameNode + Spark Master
 2. node2 : YARN ResourceManager + JobHistoryServer + ProxyServer
