@@ -7,12 +7,12 @@ HADOOP_PREFIX=/usr/local/hadoop
 HADOOP_CONF=$HADOOP_PREFIX/etc/hadoop
 HADOOP_VERSION=hadoop-2.6.0
 HADOOP_ARCHIVE=$HADOOP_VERSION.tar.gz
-HADOOP_MIRROR_DOWNLOAD=http://archive.apache.org/dist/hadoop/core/hadoop-2.4.1/hadoop-2.4.1.tar.gz
+HADOOP_MIRROR_DOWNLOAD=http://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz
 HADOOP_RES_DIR=/vagrant/resources/hadoop
 #spark
 SPARK_VERSION=spark-1.3.0
 SPARK_ARCHIVE=$SPARK_VERSION-bin-hadoop2.4.tgz
-SPARK_MIRROR_DOWNLOAD=http://www.google.com/url?q=http%3A%2F%2Fmirrors.ibiblio.org%2Fapache%2Fspark%2Fspark-1.0.1%2Fspark-1.0.1.tgz&sa=D&sntz=1&usg=AFQjCNHcDNB1l9iRsGJyQzF7g-wLC15_Ag
+SPARK_MIRROR_DOWNLOAD=http://www.apache.org/dist/spark/spark-1.3.0/spark-1.3.0-bin-hadoop2.4.tgz
 SPARK_RES_DIR=/vagrant/resources/spark
 SPARK_CONF_DIR=/usr/local/spark/conf
 #ssh
