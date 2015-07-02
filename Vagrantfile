@@ -1,7 +1,19 @@
 Vagrant.require_version ">= 1.4.3"
 VAGRANTFILE_API_VERSION = "2"
 
+class CentosKernelDevelInstaller < VagrantVbguest::Installers::Linux
+	def install(opts=nil, &block)
+		# comment out exclude kernel in yum.conf
+		communicate.sudo('sed -i -e \'/exclude=kernel/s/^/#/\' /etc/yum.conf', opts, &block)
+		# install kernel-devel-2.6.32-431.el6.x86_64
+		communicate.sudo('yum install -y http://vault.centos.org/6.4/cr/x86_64/Packages/kernel-devel-2.6.32-431.el6.x86_64.rpm', opts, &block)
+		super
+	end
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+	config.vbguest.installer = CentosKernelDevelInstaller
+	
 	numNodes = 4
 	r = numNodes..1
 	(r.first).downto(r.last).each do |i|
